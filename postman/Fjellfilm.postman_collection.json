@@ -1,0 +1,73 @@
+{
+  "info": {
+    "name": "Fjellfilm Movie Review API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/health"
+      }
+    },
+    {
+      "name": "Get Movies",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/movies"
+      }
+    },
+    {
+      "name": "Create Movie",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Inception\",\n  \"director\": \"Christopher Nolan\",\n  \"releaseYear\": 2010,\n  \"genre\": \"Sci-Fi\"\n}"
+        },
+        "url": "http://localhost:3000/movies"
+      }
+    },
+    {
+      "name": "Get Movie By Id",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/movies/1"
+      }
+    },
+    {
+      "name": "Update Movie",
+      "request": {
+        "method": "PUT",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Inception (Updated)\",\n  \"director\": \"Christopher Nolan\",\n  \"releaseYear\": 2010,\n  \"genre\": \"Thriller\"\n}"
+        },
+        "url": "http://localhost:3000/movies/1"
+      }
+    },
+    {
+      "name": "Create Review",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reviewAuthor\": \"Alice\",\n  \"reviewText\": \"Great movie!\",\n  \"rating\": 5\n}"
+        },
+        "url": "http://localhost:3000/movies/1/reviews"
+      }
+    },
+    {
+      "name": "Get Reviews For Movie",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/movies/1/reviews"
+      }
+    }
+  ]
+}
+
