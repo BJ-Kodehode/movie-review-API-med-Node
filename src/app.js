@@ -6,6 +6,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(express.static('public'));
 
 // Health check
 app.get('/health', (req, res) => {
@@ -15,6 +16,11 @@ app.get('/health', (req, res) => {
 // Mount routes
 const moviesRouter = require('./routes/movies');
 app.use('/movies', moviesRouter);
+
+// Root serves UI
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
 
 // 404 handler
 app.use((req, res) => {

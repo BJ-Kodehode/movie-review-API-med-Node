@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fjellfilm – Filmliste</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Fjellfilm</h1>
+    <p>Movie Review API – Filmliste</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Filmer</h2>
+      <div id="movies" class="grid"></div>
+    </section>
+  </main>
+
+  <template id="movie-card">
+    <article class="movie">
+      <h3 class="movie__title"></h3>
+      <p class="movie__meta"></p>
+      <p class="movie__genre"></p>
+    </article>
+  </template>
+
+  <script>
+    async function loadMovies() {
+      const container = document.getElementById('movies');
+      container.innerHTML = '<p class="muted">Laster…</p>';
+      try {
+        const res = await fetch('/movies');
+        if (!res.ok) throw new Error('Kunne ikke hente filmer');
+        const movies = await res.json();
+        container.innerHTML = '';
+        if (!Array.isArray(movies) || movies.length === 0) {
+          container.innerHTML = '<p class="muted">Ingen filmer funnet. Legg til via API.</p>';
+          return;
+        }
+        const tpl = document.getElementById('movie-card');
+        movies.forEach(m => {
+          const node = tpl.content.cloneNode(true);
+          node.querySelector('.movie__title').textContent = m.title;
+          node.querySelector('.movie__meta').textContent = `${m.director || 'Ukjent regissør'} • ${m.releaseYear}`;
+          node.querySelector('.movie__genre').textContent = m.genre ? `Sjanger: ${m.genre}` : '';
+          container.appendChild(node);
+        });
+      } catch (e) {
+        container.innerHTML = `<p class="error">${e.message}</p>`;
+      }
+    }
+    loadMovies();
+  </script>
+</body>
+</html>
+

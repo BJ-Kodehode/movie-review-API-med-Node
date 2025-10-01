@@ -64,6 +64,13 @@ Legg til i `package.json`:
 ```
 
 ### Ekstra dependencies
+### Enkel web UI
+
+Vi server en liten statisk side fra `public/` som lister filmer:
+
+- Åpne `http://localhost:3000/` i nettleser for å se filmlisten
+- Filene ligger i `public/index.html` og `public/styles.css`
+
 
 - express – HTTP server
 - mssql, tedious – SQL Server driver
